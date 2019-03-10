@@ -64,7 +64,6 @@ esp_err_t esp32_wifi_ev(system_event_t *ev) {
       send_mg_ev = true;
       break;
     case SYSTEM_EVENT_STA_CONNECTED:
-      LOG(LL_INFO, ("SYSTEM_EVENT_STA_CONNECTED"));
       tcpip_adapter_create_ip6_linklocal(TCPIP_ADAPTER_IF_STA);
       mg_ev = MGOS_WIFI_EV_STA_CONNECTED;
       send_mg_ev = true;
@@ -78,8 +77,6 @@ esp_err_t esp32_wifi_ev(system_event_t *ev) {
           ip6addr_ntoa(&ev->event_info.got_ip6.ip6_info.ip)));
       break;
     case SYSTEM_EVENT_AP_STACONNECTED: {
-      LOG(LL_INFO, ("SYSTEM_EVENT_AP_STACONNECTED"));
-      tcpip_adapter_create_ip6_linklocal(TCPIP_ADAPTER_IF_STA);
       memset(&ap_sta_connected, 0, sizeof(ap_sta_connected));
       memcpy(ap_sta_connected.mac, ev->event_info.sta_connected.mac,
              sizeof(ap_sta_connected.mac));
